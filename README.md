@@ -1,4 +1,6 @@
 # WSL Payload Builder
+## Disclaimer
+This tool is intended for legitimate security research and penetration testing. Users are responsible for ensuring they have proper authorization before testing systems they do not own or have explicit permission to test.
 ## Overview
 A shell script for creating minimal WSL (Windows Subsystem for Linux) distributions with embedded payloads. This tool automates the process of building Alpine Linux-based WSL distributions that can execute custom payloads upon launch.
 
@@ -61,12 +63,10 @@ Edit the variables at the top of `Runner.bat` to customize:
 set "DOWNLOAD_URL=https://your-server.com/payload.wsl"
 set "WSL_FILE=payload.log" # Still testing but can use most file extensions here. 
 ```
+## References
 
-## Security Considerations
+This project was inspired by and builds upon the research and techniques documented in the [dmcxblue/WSL-Payloads](https://github.com/dmcxblue/WSL-Payloads) repository, which provides valuable insights into WSL file format weaponization and security research.
 
-- **Payload Execution**: The embedded payload runs with root privileges when the WSL distribution is launched
-- **File Permissions**: All executable files are properly set with appropriate permissions
-- **Isolation**: The generated WSL distribution is isolated from the host system
 
 ## License
 MIT License
@@ -89,10 +89,3 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-## Disclaimer
-
-This tool is intended for legitimate security research and penetration testing. Users are responsible for ensuring they have proper authorization before testing systems they do not own or have explicit permission to test.
-
-## References
-
-This project was inspired by and builds upon the research and techniques documented in the [dmcxblue/WSL-Payloads](https://github.com/dmcxblue/WSL-Payloads) repository, which provides valuable insights into WSL file format weaponization and security research.
