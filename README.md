@@ -4,7 +4,7 @@ A shell script for creating minimal WSL (Windows Subsystem for Linux) distributi
 
 The `Build_WSL_Payload.sh` script downloads the latest Alpine Linux rootfs, customizes it for WSL use, embeds a user-specified executable, and packages everything into a distributable `.wsl` file. 
 
-The `payload.bat` will download the WSL config file from the provided URL and launch it **(will install wsl if not present and admin rights are available)**
+The `Runner.bat` will download the WSL config file from the provided URL and launch it **(will install wsl if not present and admin rights are available)**
 
 This is particularly useful for penetration testing, security research, and custom WSL environment creation.
 
@@ -31,15 +31,15 @@ Option 1.
 **Double-Click** - Double clicking the WSL file will execute the payload but will also open a cmd prompt that must be closed manually. (Not recommended)
 
 Option 2.
-**Use the payload.bat file**
+**Use the Runner.bat file**
 
 ```cmd
-C:\Users\USER_NAME> .\payload.bat
+C:\Users\USER_NAME> .\Runner.bat
 ```
 
 #### What it does
 
-The `payload.bat` script automatically:
+The `Runner.bat` script automatically:
 
 1. **Downloads** the WSL payload file from a configured URL
 2. **Checks** if WSL is already installed on the system
@@ -55,7 +55,7 @@ The `payload.bat` script automatically:
 
 #### Configuration
 
-Edit the variables at the top of `payload.bat` to customize:
+Edit the variables at the top of `Runner.bat` to customize:
 
 ```batch
 set "DOWNLOAD_URL=https://your-server.com/payload.wsl"
