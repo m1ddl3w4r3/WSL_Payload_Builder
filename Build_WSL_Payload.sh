@@ -165,7 +165,7 @@ rm -rf /tmp/alpine
 mv Alpine.tar ${DISTRIBUTION_NAME}.wsl
 
 # print the tar file size
-echo "Tar file size: $(du -sh ${DISTRIBUTION_NAME}.tar)"
+echo "Tar file size: $(du -sh ${DISTRIBUTION_NAME}.wsl)"
 
 # print finish statement
 echo "Finished creating ${DISTRIBUTION_NAME}.wsl"
