@@ -1,0 +1,8 @@
+# WSL Payload Builder .gitignore
+# Development
+.cursor/
+.devcontainer/
+
+# Build artifacts and outputs
+*.wsl
+*.exe
