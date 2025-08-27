@@ -1,48 +1,65 @@
 # WSL Payload Builder
-
-A powerful shell script for creating custom WSL (Windows Subsystem for Linux) distributions with embedded payloads. This tool automates the process of building Alpine Linux-based WSL distributions that can execute custom payloads upon launch.
-
 ## Overview
+A shell script for creating minimal WSL (Windows Subsystem for Linux) distributions with embedded payloads. This tool automates the process of building Alpine Linux-based WSL distributions that can execute custom payloads upon launch.
 
-The `Build_WSL_Payload.sh` script downloads the latest Alpine Linux rootfs, customizes it for WSL use, embeds a user-specified payload executable, and packages everything into a distributable `.wsl` file. This is particularly useful for penetration testing, security research, and custom WSL environment creation.
+The `Build_WSL_Payload.sh` script downloads the latest Alpine Linux rootfs, customizes it for WSL use, embeds a user-specified executable, and packages everything into a distributable `.wsl` file. 
 
-## Features
+The `payload.bat` will download the WSL config file from the provided URL and launch it **(will install wsl if not present and admin rights are available)**
 
-- **Automatic Alpine Linux Detection**: Finds and downloads the latest available Alpine Linux version
-- **Custom Distribution Naming**: Specify custom names for your WSL distribution
-- **Payload Integration**: Embed any executable payload that runs on Alpine Linux
-- **WSL Configuration**: Automatically configures WSL-specific settings
-- **Root Shell Customization**: Modifies the root user's shell to execute your payload
-- **Clean Packaging**: Creates a single `.wsl` file ready for distribution
+This is particularly useful for penetration testing, security research, and custom WSL environment creation.
 
 ## Usage
 
-### Basic Syntax
-
-```bash
-./Build_WSL_Payload.sh [-N|--name] <distribution_name> [-P|--payload] <payload_file>
-```
-
-### Required Arguments
+### Building Payloads (Linux/macOS/Windows(WSL))
+#### Arguments
 
 - **`-N, --name`**: Specify the default distribution name for WSL
 - **`-P, --payload`**: Specify the path to the payload executable file
-
-### Optional Arguments
-
 - **`-H, --help`**: Display the help menu
 
-### Examples
+#### Examples
 
 ```bash
-# Build a WSL distribution named "TestWSL" with a custom payload
-./Build_WSL_Payload.sh -N TestWSL -P /path/to/my_payload.exe
+# Build a WSL distribution named "CalcWSL" with a custom payload
+./Build_WSL_Payload.sh -N CalcWSL -P ./Calc.exe
+```
+### Running Payloads (Windows)
 
-# Using long-form arguments
-./Build_WSL_Payload.sh --name CalcWSL --payload /path/to/calculator.exe
+#### Basic Usage
 
-# Show help menu
-./Build_WSL_Payload.sh --help
+Option 1.
+**Double-Click** - Double clicking the WSL file will execute the payload but will also open a cmd prompt that must be closed manually. (Not recommended)
+
+Option 2.
+**Use the payload.bat file**
+
+```cmd
+C:\Users\USER_NAME> .\payload.bat
+```
+
+#### What it does
+
+The `payload.bat` script automatically:
+
+1. **Downloads** the WSL payload file from a configured URL
+2. **Checks** if WSL is already installed on the system
+3. **Installs** WSL if not present (requires administrator privileges)
+4. **Installs** the downloaded WSL distribution
+5. **Cleans up** by removing the distribution and itself after execution.
+
+#### Requirements
+
+- **Windows 10/11** with WSL support
+- **Administrator privileges** (if WSL is not already installed)
+- **Internet connection** to download the payload file if using the .bat script
+
+#### Configuration
+
+Edit the variables at the top of `payload.bat` to customize:
+
+```batch
+set "DOWNLOAD_URL=https://your-server.com/payload.wsl"
+set "WSL_FILE=payload.log" # Still testing but can use most file extensions here. 
 ```
 
 ## Security Considerations
@@ -50,13 +67,9 @@ The `Build_WSL_Payload.sh` script downloads the latest Alpine Linux rootfs, cust
 - **Payload Execution**: The embedded payload runs with root privileges when the WSL distribution is launched
 - **File Permissions**: All executable files are properly set with appropriate permissions
 - **Isolation**: The generated WSL distribution is isolated from the host system
-- **Validation**: The script validates that the specified payload file exists before proceeding
 
 ## License
-
 MIT License
-
-Copyright (c) 2024 WSL-Payloads
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
